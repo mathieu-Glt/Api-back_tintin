@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes, Model }  = require('sequelize');
+const tintins = require('../src/db/mock_tintin');
 module.exports = (sequelize, DataTypes) => {
     class Tintin extends Model {
 
@@ -32,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
         createdAt: 'creation_times_tamp',
         updatedAt: false
 
-    })
+    });
+    return Tintin;
 
 }
         

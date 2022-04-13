@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 //onst yourPassword = hashPassword;
-const { Sequelize, DataTypes, Model }  = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
 
@@ -34,10 +34,10 @@ module.exports = (sequelize, DataTypes) => {
         hashPassword: {
             type: DataTypes.STRING,
             allowNull: false,
-            //min: 8,
-           //not: ["^[a-z]+$",'i'],
-            /*set(value) {
-                this.setDataValue('hashPassword', hash(value));
+            min: 8,
+            not: ["^[a-z]+$", 'i'],
+            /*set() {
+                this.setDataValue('#/96mG12');
             }*/
         },
         role: {
@@ -49,32 +49,39 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: true,
         createdAt: 'creation_times_tamp',
         updatedAt: false,
-        /*instanceMethods:
-        // hash pasword with separate functions
-        bcrypt.genSalt(saltRounds, (err, salt) => {
-            bcrypt.hash(hashPassword, salt, (err, hash) => {
-            });
-        }),*/
-        // Load hash from the db, which was preivously stored 
-        /*bcrypt.compare(hashPassword, hash, function(err, res) {
-            if (res == true){
-                return res;
-            } else {
-                return err;
+        hooks: {
+            beforeCreate: async (user) => {
+                if (user.hashPassword) {
+                    const salt = await bcrypt.genSaltSync(10, 'a');
+                    user.hashPassword = bcrypt.hashSync(user.hashPassword, salt);
+                }
+            },
+            beforeUpdate: async (user) => {
+                if (user.hashPassword) {
+                    const salt = await bcrypt.genSaltSync(10, 'a');
+                    user.hashPassword = bcrypt.hashSync(user.hashPassword, salt);
+                }
             }
-        })*/
-
-
+        },
+        instanceMethods: {
+            validPassword: (password) => {
+                return bcrypt.compareSync(password, this.hashPassword);
+            }
+        }
     });
+    User.prototype.validPassword = async (password, hash) => {
+        return await bcrypt.compareSync(password, hash);
+    }
     return User;
+
 };
-    
 
 
 
 
-        
 
 
 
-    
+
+
+
