@@ -6,8 +6,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const TintinModel = require('./models/tintin');
 const UserModel = require('./models/user');
 const FavorisModel = require('./models/favoris');
-
-
+const tintins = require('./src/db/mock_tintin')
 
 
 const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet', '379a46404e062e0b0e8b7799b58095a4', {
@@ -20,20 +19,30 @@ sequelize.authenticate()
     .catch(error => console.error('Unable to connect to the database: ${error}'));
 
 
-
 const Tintin = TintinModel(sequelize, DataTypes);
 const User = UserModel(sequelize, DataTypes);
 const Favoris = FavorisModel(sequelize, DataTypes);
 
 sequelize.sync({force: true})
-    .then(_ => console.log('the database "Tintin" database has been synchronized.'))
+    .then(_ => {
+        console.log('the database "Tintin" database has been synchronized.'),
+    
+    tintins.map(tintin => {
+        Tintin.create({
+            title: tintin.title,
+            picture: tintin.picture,
+            synopsis: tintin.synopsis,
+            movie: tintin.movie
+        }).then(tintin => console.log(tintin.toJSON()))
+        console.log("The database 'Tintin' initialized")
+    })})
     .then(_ => {
         console.log('the database "User" database has been synchronized.'),
         User.create({
             firstName: 'mathieu',
-            lastName: 'gillet',
+            lastName: 'GILLET',
             email: 'mathieugt@gmail.it',
-            hashPassword: 'mT/*4587/#',
+            hashPassword: 'mT/*4587',
             role: 'admin'
     }).then(user => console.log(user.toJSON()))
     console.log("The database 'User' initialized")
