@@ -1,44 +1,26 @@
-const { Sequelize, DataTypes, Model }  = require('sequelize');
-const tintins = require('../src/db/mock_tintin');
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Tintin extends Model {
-
+  class Tintin extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-
-    Tintin.init({
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        picture: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        synopsis: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        movie: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
-    }, {
-        sequelize,
-        timestamps: true,
-        createdAt: 'creation_times_tamp',
-        updatedAt: false
-
-    });
-    return Tintin;
-
-}
-        
-
-
-
-    
+  }
+  Tintin.init({
+    title: DataTypes.STRING,
+    picture: DataTypes.STRING,
+    synopsis: DataTypes.TEXT,
+    movie: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Tintin',
+  });
+  return Tintin;
+};

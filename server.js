@@ -6,7 +6,9 @@ const { Sequelize, DataTypes } = require("sequelize");
 const TintinModel = require('./models/tintin');
 const UserModel = require('./models/user');
 const FavorisModel = require('./models/favoris');
-const tintins = require('./src/db/mock_tintin')
+const tintins = require('./src/db/mock_tintin');
+const users = require('./src/db/mock_user');
+const user = require("./models/user");
 
 
 const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet', '379a46404e062e0b0e8b7799b58095a4', {
@@ -38,15 +40,19 @@ sequelize.sync({force: true})
     })})
     .then(_ => {
         console.log('the database "User" database has been synchronized.'),
+
+    users.map(user => {
         User.create({
-            firstName: 'mathieu',
-            lastName: 'GILLET',
-            email: 'mathieugt@gmail.it',
-            hashPassword: 'mT/*4587',
-            role: 'admin'
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            hashPassword: user.hashPassword,
+            role: user.role
     }).then(user => console.log(user.toJSON()))
     console.log("The database 'User' initialized")
 })
+
+    })
     .then(_ => console.log('the database "Favoris" database has been synchronized.'))
 
     
