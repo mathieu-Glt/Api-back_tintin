@@ -10,6 +10,10 @@ const tintins = require('./src/db/mock_tintin');
 const users = require('./src/db/mock_user');
 const user = require("./models/user");
 const usersRoutes = require('./src/routes/usersRoutes');
+const tintinRoutes = require('./src/routes/tintinRoutes');
+const favorisRoutes = require('./src/routes/favorisRoutes');
+
+
 
 
 const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet', '379a46404e062e0b0e8b7799b58095a4', {
@@ -57,6 +61,9 @@ sequelize.sync({force: true})
   
     //endpoints
     usersRoutes(app);
+    tintinRoutes(app);
+    favorisRoutes(app);
+
 
 })
 
