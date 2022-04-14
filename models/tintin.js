@@ -11,16 +11,39 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Tintin.belongsTo(models.Favoris, {
+        as: 'favoris',
+        foreignKey: 'movieId'
+      });
     }
   }
   Tintin.init({
-    title: DataTypes.STRING,
-    picture: DataTypes.STRING,
-    synopsis: DataTypes.TEXT,
-    movie: DataTypes.STRING
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    picture: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    synopsis: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    movie: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    tintinId: {
+      type: DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Tintin',
+    timestamps: true,
+    createdAt: 'creation_times_tamp',
+    updatedAt: false,
+
   });
   return Tintin;
 };

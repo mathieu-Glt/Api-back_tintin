@@ -11,14 +11,44 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasOne(models.Favoris, {
+        as: 'favoris',
+        foreignKey: 'userId'
+      });
     }
   }
   User.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    hashPassword: DataTypes.STRING,
-    role: DataTypes.STRING
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      isNumeric: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      isNumeric: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      notNull: true,
+      isNumeric: false
+
+    },
+    hashPassword: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      notNull: true,
+      min: 8
+    },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.INTEGER, 
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'User',
@@ -32,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
             user.hashPassword = bcrypt.hashSync(user.hashPassword, salt);
         }
     },
-    beforeUpdate: async (user) => {
+      beforeUpdate: async (user) => {
         if (user.hashPassword) {
             const salt = await bcrypt.genSaltSync(10, 'a');
             user.hashPassword = bcrypt.hashSync(user.hashPassword, salt);

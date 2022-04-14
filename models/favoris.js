@@ -11,16 +11,31 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Favoris.belongsTo(models.User, {
+        as: 'user',
+        foreignKey: 'userId'
+      });
+
+      Favoris.hasMany(models.Tintin, {
+        as: 'tintin',
+        foreignKey: 'movieId'
+      });
     }
   }
   Favoris.init({
-    title: DataTypes.STRING,
-    picture: DataTypes.STRING,
-    synopsis: DataTypes.TEXT,
-    movie: DataTypes.STRING
+    userId: {
+      type: DataTypes.INTEGER
+    },
+    tintinId: {
+      type: DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Favoris',
+    timestamps: true,
+    createdAt: 'creation_times_tamp',
+    updatedAt: false,
+
   });
   return Favoris;
 };

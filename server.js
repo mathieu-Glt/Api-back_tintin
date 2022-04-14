@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 8080;
+//const port = 8080;
 const { Sequelize, DataTypes } = require("sequelize");
 const TintinModel = require('./models/tintin');
 const UserModel = require('./models/user');
@@ -9,6 +9,7 @@ const FavorisModel = require('./models/favoris');
 const tintins = require('./src/db/mock_tintin');
 const users = require('./src/db/mock_user');
 const user = require("./models/user");
+const usersRoutes = require('./src/routes/usersRoutes');
 
 
 const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet', '379a46404e062e0b0e8b7799b58095a4', {
@@ -50,9 +51,28 @@ sequelize.sync({force: true})
             role: user.role
     }).then(user => console.log(user.toJSON()))
     console.log("The database 'User' initialized")
+    app.get('/', (req, res)=>{
+        res.json({status: 200, msg: "Welcome to API REST"})
+    })
+  
+    //endpoints
+    usersRoutes(app);
+
 })
 
-    })
-    .then(_ => console.log('the database "Favoris" database has been synchronized.'))
+
+
+
+})
+
+
+
+    
+
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
 
     
