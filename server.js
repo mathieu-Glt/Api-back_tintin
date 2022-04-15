@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const bodyParser = require('body-parser')
 //const port = 8080;
 const { Sequelize, DataTypes } = require("sequelize");
 const TintinModel = require('./src/models/tintin');
@@ -12,7 +13,8 @@ const usersRoutes = require('./src/routes/usersRoutes');
 const tintinRoutes = require('./src/routes/tintinRoutes');
 const favorisRoutes = require('./src/routes/favorisRoutes');
 
-
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 
 const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet', '379a46404e062e0b0e8b7799b58095a4', {

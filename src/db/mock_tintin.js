@@ -160,6 +160,14 @@ const tintins = [
         synopsis: "Tintin et le capitaine Haddock arrivent en Syldavie où ils sont invités chez le professeur Tournesol dans la villa Sprok, au bord du lac Fléchizaff, une étendue d'eau artificielle ayant la réputation d'être maudite. Les deux amis retrouvent à l'aéroport Dupond et Dupont, également appelés par Tournesol pour assurer sa protection. Tous prennent ensuite un avion-taxi pour arriver chez le professeur, mais l'appareil tombe en panne de moteur en plein vol et le pilote saute en parachute. Tintin parvient à poser l'avion, non sans heurts car l'appareil finit sa course au bord d'une falaise, c'est alors que deux jeunes Syldaves, Niko et Nouchka, viennent à leur secours et les emmènent chez Tournesol. Celui-ci leur révèle qu'il vient d'inventer une sorte de photocopieur en trois dimensions, capable de reproduire n'importe quel objet.",
         movie: "https://www.youtube.com/watch?v=eoLPFtXAkrU"
     },
+    {
+        id: 24,
+        title: "Tintin au pays des Soviets",
+        picture: 'https://cdn001.tintin.com/public/tintin/img/static…-des-soviets/tintin-au-pays-des-soviets-fr_v2.jpg',
+        synopsis: "Nous sommes le 10 janvier 1929, à Bruxelles. Accompagné de son chien Milou, un tout jeune reporter monte dans le train à destination de Moscou. Pour Tintin, c'est le début d'une grande aventure. Pour Hergé, c'est le vrai début de sa carrière. Les Aventures de Tintin, reporter du Petit Vingtième au pays des Soviets paraîtront sous forme d'album en 1930. Cette année marque la naissance d'un mythe qui n'est pas près de s'éteindre, et les premiers signes d'une troublante confrontation entre la fiction et la réalité.",
+        movie: "https://www.youtube.com/watch?v=1-ZovTqSJRA"
+    },
+
 
 ];
 

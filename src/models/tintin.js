@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Tintin.belongsTo(models.Favoris, {
+      Tintin.hasMany(models.Favoris, {
         as: 'favoris',
         foreignKey: 'movieId'
       });
@@ -32,9 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    tintinId: {
-      type: DataTypes.INTEGER
-    }
   }, {
     sequelize,
     modelName: 'Tintin',

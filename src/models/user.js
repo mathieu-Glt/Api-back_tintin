@@ -11,10 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasOne(models.Favoris, {
-        as: 'favoris',
-        foreignKey: 'userId'
-      });
+      User.hasOne(models.Favoris, {foreignKey: 'favorisId', as: 'favoris'});
     }
   }
   User.init({
@@ -32,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       notNull: true,
-      isNumeric: false
+      isNumeric: false,
+      isEamail: true
 
     },
     hashPassword: {
@@ -45,9 +43,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    userId: {
-      type: DataTypes.INTEGER, 
-      allowNull: true
+    favorisId: {
+      type: DataTypes.INTEGER,
     }
   }, {
     sequelize,
