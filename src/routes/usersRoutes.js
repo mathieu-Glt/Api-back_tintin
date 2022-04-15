@@ -1,5 +1,5 @@
 const { Sequelize, Datatypes } = require('sequelize')
-const User = require('../../models/user')
+const User = require('../models/user')
 
 module.exports = (app, db) => {
     app.get('/test/user', (req, res)=> {

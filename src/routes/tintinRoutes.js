@@ -1,5 +1,6 @@
 const { Sequelize, Datatypes } = require('sequelize')
-const Tintin = require('../../models/tintin').Tintin
+const Tintin = require('../models/tintin');
+//const Tintin = require('../models/tintin').Tintin
 
 module.exports = (app, db) => {
     app.get('/test/tintin', (req, res)=> {
@@ -7,17 +8,14 @@ module.exports = (app, db) => {
 
     });
 
-    app.get('/api/tintins', (req, res) => {
-        Tintin.findAll()
-        .then(tintins => {
-            const msg = "The list'movies'tintin has been successfully recovered."
-            res.json({status: 200, msg, data: tintins})
-        })
-        .catch(err => {
-            message:
-                err.message || "Some error occured while retrieving tutorials"
-        })
-    })
+    app.get('/api/tintins', async (req, res) => {
+        const tintin = await Tintin.findByPk(2);
+        if (tintin === null) {
+            console.log('Not found!');
+          } else {
+            console.log(tintin instanceof Tintin); // true
+            // Its primary key is 123
+          }    })
 
 
 

@@ -1,5 +1,5 @@
 const { Sequelize, Datatypes } = require('sequelize')
-const Favoris = require('../../models/favoris')
+const Favoris = require('../models/favoris')
 
 module.exports = (app, db) => {
     app.get('/test/favoris', (req, res)=> {
