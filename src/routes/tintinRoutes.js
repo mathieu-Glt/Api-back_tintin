@@ -4,9 +4,12 @@ const { Tintin } = require('../db/sequelizeTintin')
 //const Tintin = require('../models/tintin');
 //const Tintin = require('../models/tintin').Tintin
 
-module.exports = (app, db) => {
+module.exports = (app) => {
     app.get('/test/tintin', (req, res)=> {
-        res.status(200).send("Welcome to API Tintin")  
+        res.status(200).json({
+                    status: 1,
+                    msg: "Welcome to API Tintin"
+                })  
 
     });
 
@@ -14,18 +17,30 @@ module.exports = (app, db) => {
         const tintins = await Tintin.findAll();
         console.log(tintins)
         if (tintins === null) {
-            res.status(404).send('Page not found')
+            res.status(404).json({
+                status: 404,
+                msg: 'Page not found'
+            })
             } else {
-                res.status(200).send({status: 200, result: tintins})
+                res.status(200).json({
+                    status: 200, 
+                    result: tintins
+                })
             }})
 
     app.get('/api/tintins/:id', async (req, res) => {
         const tintin = await Tintin.findByPk(req.params.id);
         console.log(tintin)
         if (tintin === null) {
-            res.status(404).send('Page not found')
+            res.status(404).json({
+                status: 404,
+                msg: 'Page not found'
+            })
             } else {
-                res.status(200).send({status: 200, result: tintin})
+                res.status(200).json({
+                    status: 200, 
+                    result: tintin
+                })
             }})
 
     app.post('/api/tintins', async (req, res) => {
@@ -78,7 +93,7 @@ module.exports = (app, db) => {
         }).then(data => {
             res.status(200).json({
                 status: 1,
-                message: "Movie has been deleted succesfully !"
+                message: "Movie has been deleted succesfully !",
             }).catch(error => {
                 res.status(500).json({
                     status: 0,

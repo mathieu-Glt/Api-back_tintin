@@ -18,30 +18,40 @@ module.exports = (sequelize, DataTypes) => {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
-      isNumeric: false
+      validate: {
+        isAlpha: true,
+        notEmpty: true,
+        notNull: true
+      }
     },
     lastName: {
       type: DataTypes.STRING,
       allowNull: false,
-      isNumeric: false
+      validate: {
+        isAlpha: true,
+        notEmpty: true,
+        notNull: true
+      }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      notNull: true,
-      isNumeric: false,
-      isEamail: true
-
+      validate: {
+        notEmpty: true,
+        notNull: true,
+        isEmail: true
+      }
     },
     hashPassword: {
       type: DataTypes.STRING,
       allowNull: false,
       notNull: true,
+      notEmpty: true,
+      is: ["^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"],
       min: 8
     },
     role: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     favorisId: {
       type: DataTypes.INTEGER,
