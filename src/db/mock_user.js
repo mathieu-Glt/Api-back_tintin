@@ -4,7 +4,7 @@ const users = [
         firstName: 'Mathieu',
         lastName: 'GILLET',
         email: "mathieugt@gmail.it",
-        hashPassword: "mR/14@mG",
+        hashPassword: "1Team017$",
         role: 'admin'
     },
     {
@@ -12,7 +12,7 @@ const users = [
         firstName: 'Matthieu',
         lastName: 'DIAS',
         email: "matthieuDS@gmail.com",
-        hashPassword: "48*jkKl",
+        hashPassword: "48*jkKllk",
         role: 'user'
     },
     {
@@ -20,7 +20,7 @@ const users = [
         firstName: 'Alexandre',
         lastName: 'RAVICHANDRAN',
         email: "alex-rcdrn@gmail.ca",
-        hashPassword: "Jhg@48*",
+        hashPassword: "5@48Gh#*",
         role: 'admin'
     },
     {
@@ -28,7 +28,7 @@ const users = [
         firstName: 'Corentin',
         lastName: 'WAUCAMPT',
         email: "corentin.wcpt@gmail.com",
-        hashPassword: "Ct@/gdd*",
+        hashPassword: "10Ct@/gdd*",
         role: 'user'
     },
     {
@@ -36,7 +36,7 @@ const users = [
         firstName: 'Thomas',
         lastName: 'MONNET',
         email: "thom-mnet@gmail.it",
-        hashPassword: "Thff*/@41",
+        hashPassword: "85Thff*/@41",
         role: 'user'
     }
 ];

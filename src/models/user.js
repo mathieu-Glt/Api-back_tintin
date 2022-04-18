@@ -31,6 +31,12 @@ module.exports = (sequelize, DataTypes) => {
         isAlpha: true,
         notEmpty: true,
         notNull: true
+      },
+      get() {
+        return this.getDataValue('lastName')
+      },
+      set(lastName) {
+        return this.setDataValue('lastName', lastName.toUpperCase())
       }
     },
     email: {
@@ -45,10 +51,11 @@ module.exports = (sequelize, DataTypes) => {
     hashPassword: {
       type: DataTypes.STRING,
       allowNull: false,
-      notNull: true,
-      notEmpty: true,
-      is: ["^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"],
-      min: 8
+      validate: {
+        notNull: true,
+        notEmpty: true,
+        //is: ["^(?=.*[0-9])(?=.*[az])(?=.*[AZ])(?=.*[@#$%^&-+=() ])(?=\\S+$).{8, 20}$"]
+      }
     },
     role: {
       type: DataTypes.STRING,
