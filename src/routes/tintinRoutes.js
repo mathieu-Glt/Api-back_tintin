@@ -1,11 +1,12 @@
 const { Sequelize, Datatypes } = require('sequelize');
 const tintins = require('../db/mock_tintin');
-const { Tintin } = require('../db/sequelizeTintin')
+const { Tintin } = require('../db/sequelizeTintin');
 //const Tintin = require('../models/tintin');
 //const Tintin = require('../models/tintin').Tintin
 
-module.exports = (app) => {
+module.exports = (app, slug) => {
     app.get('/test/tintin', (req, res)=> {
+        console.log(slug('Tintin à l\'Ouest d\'Eden', '_'))
         res.status(200).json({
                     status: 1,
                     msg: "Welcome to API Tintin"
@@ -14,13 +15,15 @@ module.exports = (app) => {
     });
 
     app.get('/api/tintins', async (req, res) => {
-        const tintins = await Tintin.findAll();
-        console.log(tintins)
-        if (tintins === null) {
+        const tintinsAll = await Tintin.findAll();
+        console.log(tintinsAll)
+        if (tintinsAll === null) {
             res.status(404).json({
                 status: 404,
                 msg: 'Page not found'
             })
+
+        
             } else {
                 res.status(200).json({
                     status: 200, 
@@ -28,9 +31,26 @@ module.exports = (app) => {
                 })
             }})
 
+    app.get('/api/tintins/title', async (req, res) => {
+        const tintin = await Tintin.findOne({ where: { title: 'Tintin au Tibet'} });
+        console.log(tintin)
+        if (tintin === null) {
+            res.status(404).json({
+                status: 404,
+                msg: 'Request not found'
+            })
+        } else {
+            res.status(200).json({
+                status: 200,
+                msg: 'request has succeeded',
+                result: tintin
+            })
+        }
+    })
+
     app.get('/api/tintins/:id', async (req, res) => {
         const tintin = await Tintin.findByPk(req.params.id);
-        console.log(tintin)
+        //console.log(tintin)
         if (tintin === null) {
             res.status(404).json({
                 status: 404,
@@ -44,7 +64,7 @@ module.exports = (app) => {
             }})
 
     app.post('/api/tintins', async (req, res) => {
-        console.log(req.body)
+        //console.log(req.body)
             Tintin.create({
                 title: req.body.title,
                 picture: req.body.picture,
@@ -58,7 +78,7 @@ module.exports = (app) => {
     })
 
     app.put('/api/tintins/:id', async (req, res) => {
-        console.log(req.body)
+        //console.log(req.body)
             Tintin.update({
                 title: req.body.title,
                 picture: req.body.picture,

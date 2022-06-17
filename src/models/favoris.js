@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({ Favoris }) {
       // define association here
-      Favoris.belongsTo(models.Favoris, {foreignKey: 'userId', as: 'user'});
+      Favoris.belongsTo(Favoris, {foreignKey: 'userId', as: 'user'});
 
-      Favoris.hasMany(models.Favoris, {foreignKey: 'tintinId', as: 'tintins'});
+      Favoris.hasMany(Favoris, {foreignKey: 'tintinId', as: 'tintins'});
     }
   }
   Favoris.init({

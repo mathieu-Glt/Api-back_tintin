@@ -4,7 +4,7 @@ const { User } = require('../db/sequelizeUser')
 
 
 module.exports = (app) => {
-    app.get('/test/user', (req, res)=> {
+    app.get('/test/user', (res)=> {
         res.status(200).json({
                         status: 1,
                         msg:   "Welcome to API User"
@@ -12,7 +12,7 @@ module.exports = (app) => {
 
     });
 
-    app.get('/api/users', async (req, res) => {
+    app.get('/api/users', async (res) => {
         const users = await User.findAll();
         console.log(users)
         if (users === null) {

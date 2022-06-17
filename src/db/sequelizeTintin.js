@@ -18,7 +18,8 @@ const initDb = () => {
         synopsis: tintin.synopsis,
         movie: tintin.movie,
         types: tintin.types.join()
-      }).then(tintin => console.log(tintin.toJSON()))
+      })
+      //.then(tintin => console.log(tintin.toJSON()))
     })
     console.log('La table Tintins a bien été initialisée !')
   })

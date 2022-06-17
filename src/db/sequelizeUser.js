@@ -21,7 +21,8 @@ const initDb = () => {
           hashPassword: user.hashPassword,
           role: user.role,
           types: user.types.join()
-        }).then(tintin => console.log(tintin.toJSON()))
+        })
+        //.then(tintin => console.log(tintin.toJSON()))
       })
       console.log('La table Users a bien été initialisée !')
     })

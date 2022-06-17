@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({ Favoris }) {
       // define association here
-      User.hasOne(models.Favoris, {foreignKey: 'favorisId', as: 'favoris'});
+      User.hasOne(Favoris, {foreignKey: 'favorisId', as: 'favoris'});
     }
   }
   User.init({
@@ -62,7 +62,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     favorisId: {
       type: DataTypes.INTEGER,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
     }
+
   }, {
     sequelize,
     modelName: 'User',
