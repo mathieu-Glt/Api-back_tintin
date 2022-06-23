@@ -8,7 +8,7 @@ const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet'
 })
   
 const Favoris = FavorisModel(sequelize, DataTypes);
-  
+  /*
 const initDb = () => {
   return sequelize.sync({force: true}).then(_ => {
     favoris.map(favoris => {
@@ -25,4 +25,4 @@ const initDb = () => {
   
 module.exports = { 
   initDb, Favoris
-}
+}*/

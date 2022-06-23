@@ -46,11 +46,11 @@ sequelize.sync({force: true})
             synopsis: tintin.synopsis,
             movie: tintin.movie,
             tintinId: 3,
-        })//.then(tintin => console.log(tintin.toJSON()))
-        //console.log("The database 'Tintin' initialized")
+        }).then(tintin => console.log(tintin.toJSON()))
+        console.log("The database 'Tintin' initialized")
     })})
     .then(_ => {
-        //console.log('the database "User" database has been synchronized.'),
+        console.log('the database "User" database has been synchronized.'),
 
     users.map(user => {
         User.create({
@@ -60,17 +60,17 @@ sequelize.sync({force: true})
             hashPassword: user.hashPassword,
             role: user.role,
             userId: 1,
-    })//.then(user => console.log(user.toJSON()))
-    //console.log("The database 'User' initialized")
+    }).then(user => console.log(user.toJSON()))
+    console.log("The database 'User' initialized")
     app.get('/', (req, res)=>{
         res.json({status: 200, msg: "Welcome to API REST"})
     })
-    //console.log("The database 'Favoris' initialized"),
+    console.log("The database 'Favoris' initialized"),
     Favoris.create({
         tintinId: favoris.tintinId,
         userId: favoris.userId,
     })
-    //.then(favoris => console.log(favoris.toJSON()))
+    .then(favoris => console.log(favoris.toJSON()))
     //endpoints
     usersRoutes(app);
     tintinRoutes(app, slug);

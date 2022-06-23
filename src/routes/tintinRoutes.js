@@ -1,6 +1,8 @@
 const { Sequelize, Datatypes } = require('sequelize');
 const tintins = require('../db/mock_tintin');
 const { Tintin } = require('../db/sequelizeTintin');
+const cors = require('cors');
+
 //const Tintin = require('../models/tintin');
 //const Tintin = require('../models/tintin').Tintin
 
@@ -16,7 +18,6 @@ module.exports = (app, slug) => {
 
     app.get('/api/tintins', async (req, res) => {
         const tintinsAll = await Tintin.findAll();
-        console.log(tintinsAll)
         if (tintinsAll === null) {
             res.status(404).json({
                 status: 404,
@@ -33,7 +34,6 @@ module.exports = (app, slug) => {
 
     app.get('/api/tintins/title', async (req, res) => {
         const tintin = await Tintin.findOne({ where: { title: 'Tintin au Tibet'} });
-        console.log(tintin)
         if (tintin === null) {
             res.status(404).json({
                 status: 404,
@@ -49,9 +49,8 @@ module.exports = (app, slug) => {
     })
 
     app.get('/api/tintins/:id', async (req, res) => {
-        const tintin = await Tintin.findByPk(req.params.id);
-        //console.log(tintin)
-        if (tintin === null) {
+        const tintinId = await Tintin.findByPk(req.params.id);
+        if (tintinId === null) {
             res.status(404).json({
                 status: 404,
                 msg: 'Page not found'

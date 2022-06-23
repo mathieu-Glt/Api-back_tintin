@@ -14,7 +14,6 @@ module.exports = (app) => {
 
     app.get('/api/users', async (res) => {
         const users = await User.findAll();
-        console.log(users)
         if (users === null) {
             res.status(404).json({
                 status: 404,
@@ -26,9 +25,8 @@ module.exports = (app) => {
         }})
 
         app.get('/api/users/:id', async (req, res) => {
-            const user = await User.findByPk(req.params.id);
-            console.log(user)
-            if (user === null) {
+            const userId = await User.findByPk(req.params.id);
+            if (userId === null) {
                 res.status(404).json({
                     status: 404,
                     msg: 'Page not found'
