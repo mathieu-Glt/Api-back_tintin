@@ -8,12 +8,20 @@ const { Sequelize, DataTypes } = require("sequelize");
 const TintinModel = require('./src/models/tintin');
 const UserModel = require('./src/models/user');
 const FavorisModel = require('./src/models/favoris');
+const HergeModel = require('./src/models/herge');
+const PersonnageModel = require('./src/models/personnage');
 const tintins = require('./src/db/mock_tintin');
 const users = require('./src/db/mock_user');
 const favoris = require('./src/db/mock_favoris');
+const herges = require('./src/db/mock_herge');
+const personnages = require('./src/db/mock_personnage');
 const usersRoutes = require('./src/routes/usersRoutes');
 const tintinRoutes = require('./src/routes/tintinRoutes');
 const favorisRoutes = require('./src/routes/favorisRoutes');
+const hergeRoutes = require("./src/routes/hergeRoutes");
+const personnageRoutes = require("./src/routes/personnageRoutes");
+const { initDb } = require("./src/db/sequelizeUser");
+
 //const db = require("./src/models/index");
 
 
@@ -34,10 +42,12 @@ sequelize.authenticate()
 const Tintin = TintinModel(sequelize, DataTypes);
 const User = UserModel(sequelize, DataTypes);
 const Favoris = FavorisModel(sequelize, DataTypes);
+const Herge = HergeModel(sequelize, DataTypes);
+const Personnage = PersonnageModel(sequelize, DataTypes);
 
 sequelize.sync({force: true})
     .then(_ => {
-        //console.log('the database "Tintin" database has been synchronized.'),
+        console.log('the database "Tintin" database has been synchronized.'),
     
     tintins.map(tintin => {
         Tintin.create({
@@ -62,27 +72,66 @@ sequelize.sync({force: true})
             userId: 1,
     }).then(user => console.log(user.toJSON()))
     console.log("The database 'User' initialized")
-    app.get('/', (req, res)=>{
-        res.json({status: 200, msg: "Welcome to API REST"})
-    })
-    console.log("The database 'Favoris' initialized"),
-    Favoris.create({
-        tintinId: favoris.tintinId,
-        userId: favoris.userId,
-    })
-    .then(favoris => console.log(favoris.toJSON()))
+    //initDb(Favoris);
     //endpoints
-    usersRoutes(app);
-    tintinRoutes(app, slug);
-    favorisRoutes(app);
 
 
-})
+})})
+.then(_ => {
+    console.log('the database "Favoris" database has been synchronized.'),
+
+    favoris.map(favori => {
+        Favoris.create({
+            userId: favori.userId,
+            tintinId: favori.tintinId
+        }).then(favori => console.log(favori.toJSON()))
+        console.log("The database 'Favoris' initialized")
+
+
+})})
+.then(_ => {
+    console.log('the database "Herge" database has been synchronized.'),
+
+    herges.map(herge => {
+        Herge.create({
+            firstName: herge.firstName,
+            lastName: herge.lastName,
+            nomArtiste: herge.nomArtiste,
+            picture: herge.picture,
+            nationalité: herge.nationalité,
+            date_de_naissance: herge.date_de_naissance,
+            date_de_décès: herge.date_de_décès,
+            presentation: herge.presentation,
+            aventures_de_tintin: herge.aventures_de_tintin
+        }).then(herge => console.log(herge.toJSON()))
+        console.log("The database 'herge' initialized")
+    })})
+    .then(_ => {
+        console.log('the database "Personnage" database has been synchronized.'),
+
+        personnages.map(perso => {
+            Personnage.create({
+                presentation: perso.presentation,
+                suite: perso.suite,
+                picture: perso.picture,
+                age: perso.age,
+                personnalité: perso.personnalité,
+                personnalité_suite: perso.personnailté_suite
+            }).then(perso => console.log(perso.toJSON()))
+            console.log("The database 'personnage' initialized")
+
+        })
+    })
+
+
+usersRoutes(app);
+tintinRoutes(app, slug);
+hergeRoutes(app, slug);
+personnageRoutes(app, slug);
+favorisRoutes(app);
 
 
 
-
-})
 
 
 

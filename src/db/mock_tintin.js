@@ -167,6 +167,15 @@ const tintins = [
         synopsis: "Nous sommes le 10 janvier 1929, à Bruxelles. Accompagné de son chien Milou, un tout jeune reporter monte dans le train à destination de Moscou. Pour Tintin, c'est le début d'une grande aventure. Pour Hergé, c'est le vrai début de sa carrière. Les Aventures de Tintin, reporter du Petit Vingtième au pays des Soviets paraîtront sous forme d'album en 1930. Cette année marque la naissance d'un mythe qui n'est pas près de s'éteindre, et les premiers signes d'une troublante confrontation entre la fiction et la réalité.",
         movie: "https://www.youtube.com/watch?v=1-ZovTqSJRA"
     },
+    {
+        id: 25,
+        title: "Tintin au Congo",
+        picture: '25.jpg',
+        synopsis: "Tintin est envoyé au Congo belge afin de réaliser un reportage sur la situation du pays. Avec son chien Milou et après un voyage mouvementé, les deux amis doivent affronter tour à tour des animaux sauvages, des autochtones en colère et l’infâme Al Capone, qui a pour ambition de contrôler la production du diamant en Afrique. Plus tard, Hergé confiera avoir été victime des clichés et des stéréotypes de l’époque coloniale.",
+        movie: "https://www.youtube.com/watch?v=EDHBp5yWSZg"
+
+    }
+
 
 
 ];

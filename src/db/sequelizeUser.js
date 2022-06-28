@@ -10,8 +10,9 @@ const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet'
 
 
 const User = UserModel(sequelize, DataTypes);
-
 const initDb = () => {
+  console.log('okiiiii')
+
     return sequelize.sync({force: true}).then(_ => {
       users.map(user => {
         User.create({
@@ -22,7 +23,7 @@ const initDb = () => {
           role: user.role,
           types: user.types.join()
         })
-        //.then(tintin => console.log(tintin.toJSON()))
+        .then(user => console.log(user.toJSON()))
       })
       console.log('La table Users a bien été initialisée !')
     })
