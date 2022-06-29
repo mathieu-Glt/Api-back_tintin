@@ -20,7 +20,11 @@ const tintinRoutes = require('./src/routes/tintinRoutes');
 const favorisRoutes = require('./src/routes/favorisRoutes');
 const hergeRoutes = require("./src/routes/hergeRoutes");
 const personnageRoutes = require("./src/routes/personnageRoutes");
+const SerieModel = require('./src/models/serie');
+const series = require('./src/db/mock_serie');
+
 const { initDb } = require("./src/db/sequelizeUser");
+const serieRoutes = require("./src/routes/serieRoutes");
 
 //const db = require("./src/models/index");
 
@@ -44,6 +48,7 @@ const User = UserModel(sequelize, DataTypes);
 const Favoris = FavorisModel(sequelize, DataTypes);
 const Herge = HergeModel(sequelize, DataTypes);
 const Personnage = PersonnageModel(sequelize, DataTypes);
+const Serie = SerieModel(sequelize, DataTypes);
 
 sequelize.sync({force: true})
     .then(_ => {
@@ -120,12 +125,28 @@ sequelize.sync({force: true})
             }).then(perso => console.log(perso.toJSON()))
             console.log("The database 'personnage' initialized")
 
-        })
-    })
+        })})
+        .then(_ => {
+            console.log('the database "Serie" database has been synchronized.'),
+    
+            series.map(serie => {
+                Serie.create({
+                    nom: serie.nom,
+                    prenom: serie.prenom,
+                    picture: serie.picture,
+                    profession: serie.profession,
+                    personnage: serie.personnage,
+                    personnage_suite: serie.personnage_suite,
+                }).then(serie => console.log(serie.toJSON()))
+                console.log("The database 'serie' initialized")
+    
+            })})
+    
 
 
 usersRoutes(app);
 tintinRoutes(app, slug);
+serieRoutes(app, slug);
 hergeRoutes(app, slug);
 personnageRoutes(app, slug);
 favorisRoutes(app);
