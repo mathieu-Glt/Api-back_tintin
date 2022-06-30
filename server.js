@@ -60,7 +60,9 @@ sequelize.sync({force: true})
             picture: tintin.picture,
             synopsis: tintin.synopsis,
             movie: tintin.movie,
-            tintinId: 3,
+            tintinId: tintin.tintinId,
+            favorisId: tintin.favorisId,
+            rating: tintin.rating,
         }).then(tintin => console.log(tintin.toJSON()))
         console.log("The database 'Tintin' initialized")
     })})

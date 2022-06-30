@@ -774,6 +774,7 @@ const series = [
         personnage: "Connu sous l’appellation « abominable homme des neiges », c’est un personnage d’une très grande discrétion (on ne l’aperçoit qu’après 54 pages de suspense insupportable) et pourtant il est omniprésent dans notre inconscient. Il possède un cœur d’or et souffre énormément de la solitude. C’est grâce à lui que le jeune chinois Tchang a pu survivre dans la chaîne himalayenne et être sauvé par Tintin. Un rien l’effraye: l’éclair d’un flash, un éternuement du capitaine Haddock etc…Son étiquette d’« abominable homme des neiges » ne colle donc pas du tout à ce personnage très humain ! Il a tendance à chaparder les bouteilles de whisky !",
     },
     {
+
         id: 97,
         nom: 'Jacinto',
         prenom: 'Zorrino',

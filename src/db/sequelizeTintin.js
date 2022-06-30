@@ -17,6 +17,9 @@ const initDb = () => {
         picture: tintin.picture,
         synopsis: tintin.synopsis,
         movie: tintin.movie,
+        favorisId: tintin.favorisId,
+        tintinId: tintin.tintinId,
+        rating: tintin.rating,
         types: tintin.types.join()
       })
       //.then(tintin => console.log(tintin.toJSON()))

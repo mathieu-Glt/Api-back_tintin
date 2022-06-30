@@ -2,6 +2,7 @@ const { Sequelize, Datatypes } = require('sequelize');
 const tintins = require('../db/mock_tintin');
 const { Tintin } = require('../db/sequelizeTintin');
 const cors = require('cors');
+const { Op } = require('sequelize');
 
 //const Tintin = require('../models/tintin');
 //const Tintin = require('../models/tintin').Tintin
@@ -31,9 +32,40 @@ module.exports = (app, slug) => {
                     result: tintins
                 })
             }})
+            /*where: { 
+                rating: 5,
+                rating: 4
+             }});
+             console.log(rateMovie)*/
+
+
+            app.get('/api/tintins/rating', async (req, res) => {
+                const rateMovie = await Tintin.findAll({ 
+                    limit: 10,
+                    order: [
+                        ['rating', 'DESC']
+                    ]  
+                    
+                    });
+                     console.log(rateMovie)
+
+                if (rateMovie === null) {
+                    res.status(404).json({
+                        status: 404,
+                        msg: 'Request not found'
+                    })
+                } else {
+                    res.status(200).json({
+                        status: 200,
+                        msg: 'request has succeeded',
+                        result: rateMovie,
+                    })
+                }
+            })
+        
 
     app.get('/api/tintins/title', async (req, res) => {
-        const tintin = await Tintin.findOne({ where: { title: 'Tintin au Tibet'} });
+        const tintin = await Tintin.findOne({ where: { rating: 'Tintin au Tibet'} });
         if (tintin === null) {
             res.status(404).json({
                 status: 404,
@@ -82,7 +114,8 @@ module.exports = (app, slug) => {
                 title: req.body.title,
                 picture: req.body.picture,
                 synopsis: req.body.synopsis,
-                movie: req.body.movie
+                movie: req.body.movie,
+                rating: req.body.rating
             },{
                 where: {
                     id: req.params.id

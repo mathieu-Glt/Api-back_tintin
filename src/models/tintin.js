@@ -32,12 +32,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    rating: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     favorisId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     tintinId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true
     }
   }, {
