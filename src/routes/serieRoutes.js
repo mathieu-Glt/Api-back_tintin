@@ -5,7 +5,7 @@ const cors = require('cors');
 
 
 module.exports = (app, slug) => {
-    app.get('/test/serie', (req, res)=> {
+    app.get('/test/serie', async (req, res)=> {
         console.log(slug('Serie à l\'Ouest d\'Eden', '_'))
         res.status(200).json({
                     status: 1,

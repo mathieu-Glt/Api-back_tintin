@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
 const cors = require('cors');
-app.use(cors());
-var slug = require('slug')
+app.use(cors("*"));
+var slug = require('slug');
 const bodyParser = require('body-parser');
+app.use(bodyParser.json( {limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb'}));
+const session = require('express-session');
 const { Sequelize, DataTypes } = require("sequelize");
 const TintinModel = require('./src/models/tintin');
 const UserModel = require('./src/models/user');
@@ -29,8 +32,17 @@ const serieRoutes = require("./src/routes/serieRoutes");
 //const db = require("./src/models/index");
 
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+
+//session va gérer la création/vérification du token lors du login
+app.use(session({
+    secure: true,
+    httpOnly: true,
+    secret: 'love panda',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {maxAge: 3600000}
+}));
+
 
 
 const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet', '379a46404e062e0b0e8b7799b58095a4', {
@@ -50,7 +62,7 @@ const Herge = HergeModel(sequelize, DataTypes);
 const Personnage = PersonnageModel(sequelize, DataTypes);
 const Serie = SerieModel(sequelize, DataTypes);
 
-sequelize.sync({force: true})
+sequelize.sync({force: false})
     .then(_ => {
         console.log('the database "Tintin" database has been synchronized.'),
     
@@ -66,7 +78,7 @@ sequelize.sync({force: true})
         }).then(tintin => console.log(tintin.toJSON()))
         console.log("The database 'Tintin' initialized")
     })})
-    .then(_ => {
+/*.then(_ => {
         console.log('the database "User" database has been synchronized.'),
 
     users.map(user => {
@@ -83,7 +95,7 @@ sequelize.sync({force: true})
     //endpoints
 
 
-})})
+})})*/
 .then(_ => {
     console.log('the database "Favoris" database has been synchronized.'),
 

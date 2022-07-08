@@ -3,11 +3,19 @@ const tintins = require('../db/mock_tintin');
 const { Tintin } = require('../db/sequelizeTintin');
 const cors = require('cors');
 const { Op } = require('sequelize');
+const { QueryTypes } = require('sequelize');
 
 //const Tintin = require('../models/tintin');
 //const Tintin = require('../models/tintin').Tintin
+const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet', '379a46404e062e0b0e8b7799b58095a4', {
+    host: 'db.3wa.io',
+    dialect: 'mysql'
+})
+
 
 module.exports = (app, slug) => {
+    const tintin = require('../models/tintin');
+
     app.get('/test/tintin', (req, res)=> {
         console.log(slug('Tintin à l\'Ouest d\'Eden', '_'))
         res.status(200).json({
@@ -40,16 +48,16 @@ module.exports = (app, slug) => {
 
 
             app.get('/api/tintins/rating', async (req, res) => {
-                const rateMovie = await Tintin.findAll({ 
-                    limit: 10,
+                /*const rateMovie = await Tintin.findAll({ 
+                    limit: 5,
                     order: [
                         ['rating', 'DESC']
                     ]  
-                    
                     });
-                     console.log(rateMovie)
-
-                if (rateMovie === null) {
+                     console.log(rateMovie)*/
+                     const tintinsAll = await sequelize.query('SELECT DISTINCT title, picture, synopsis, movie, rating FROM Tintins ORDER BY rating DESC LIMIT 5', { type: QueryTypes.SELECT})
+                    console.log(tintinsAll)
+                if (tintinsAll === null) {
                     res.status(404).json({
                         status: 404,
                         msg: 'Request not found'
@@ -58,14 +66,15 @@ module.exports = (app, slug) => {
                     res.status(200).json({
                         status: 200,
                         msg: 'request has succeeded',
-                        result: rateMovie,
+                        result: tintinsAll,
                     })
                 }
             })
         
 
-    app.get('/api/tintins/title', async (req, res) => {
-        const tintin = await Tintin.findOne({ where: { rating: 'Tintin au Tibet'} });
+    app.get('/api/tintins/name', async (req, res) => {
+        const tintin = await Tintin.findOne({ where: { title: 'Coke en stock'} });
+        console.log(tintin)
         if (tintin === null) {
             res.status(404).json({
                 status: 404,

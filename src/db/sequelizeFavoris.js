@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const favoris = require('../models/favoris');
-const TintinModel = require('../models/favoris')
+const FavorisModel = require('../models/favoris')
   
 const sequelize = new Sequelize('mathieugillet_api-tintin_cine', 'mathieugillet', '379a46404e062e0b0e8b7799b58095a4', {
     host: 'db.3wa.io',
